@@ -1,18 +1,22 @@
 import React from "react";
 
-import "./Burger.css";
 import BurgerIngredient from "./Ingredient/Ingredient";
+import "./Burger.css";
 
 const Burger = props => {
   let transformedIngredients = Object.keys(props.ingredients)
-    .map(igKey => {
-      return [...Array(props.ingredients[igKey])].map((_, i) => {
-        return <BurgerIngredient key={igKey + i} type={igKey} />;
+    .map(item => {
+      return [...Array(props.ingredients[item])].map((emptyStr, index) => {
+        // console.log({ emptyStr, item });
+        return <BurgerIngredient key={item + index} type={item} />;
       });
     })
-    .reduce((arr, el) => {
-      return arr.concat(el);
+    .reduce((arr, currArr) => {
+      return arr.concat(currArr);
     }, []);
+
+  // console.log(transformedIngredients);
+
   if (transformedIngredients.length === 0) {
     transformedIngredients = <p>Please start adding ingredients!</p>;
   }
