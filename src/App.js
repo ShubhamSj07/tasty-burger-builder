@@ -1,13 +1,15 @@
-import "./App.css";
+import React, { Component } from "react";
 
-const App = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h1>App here...</h1>
-      </header>
-    </div>
-  );
-};
+import BurgerBuilder from "./components/BurgerBuilder/BurgerBuilder";
+
+class App extends Component {
+  render() {
+    return (
+      <div>
+        <BurgerBuilder />
+      </div>
+    );
+  }
+}
 
 export default App;
