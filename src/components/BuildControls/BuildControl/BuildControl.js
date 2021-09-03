@@ -1,10 +1,42 @@
 import React from "react";
 
+import salad from "../../../assets/burger-salad.jpg";
+import cheese from "../../../assets/burger-cheese.jpg";
+import meat from "../../../assets/burger-meat.jpg";
 import "./BuildControl.css";
 
 const BuildControl = props => (
   <div className={"BuildControl"}>
-    <div className={"Label"}>{props.label}</div>
+    {props.label === "Salad" && (
+      <img
+        src={salad}
+        alt="cheese"
+        style={{
+          width: "130px",
+          height: "130px",
+        }}
+      />
+    )}
+    {props.label === "Meat" && (
+      <img
+        src={meat}
+        alt="cheese"
+        style={{
+          width: "130px",
+          height: "130px",
+        }}
+      />
+    )}
+    {props.label === "Cheese" && (
+      <img
+        src={cheese}
+        alt="cheese"
+        style={{
+          width: "130px",
+          height: "130px",
+        }}
+      />
+    )}
     <button
       className={"Less"}
       onClick={props.onRemove}

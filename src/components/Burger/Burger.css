@@ -1,6 +1,6 @@
 .Burger {
   width: 100%;
-  margin: 1em auto;
+  margin: 10% auto 0 auto;
   height: 250px;
   overflow: auto;
   text-align: center;
@@ -26,7 +26,7 @@
   .Burger {
     /* width: 470px;
     height: 500px; */
-    width: 333px;
-    height: 428px;
+    width: 371px;
+    height: 480px;
   }
 }
