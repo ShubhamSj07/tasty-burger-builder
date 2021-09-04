@@ -6,7 +6,7 @@ import "./BuildControls.css";
 const BuildControls = props => {
   const controls = [
     { label: "Salad", type: "salad" },
-    { label: "Bacon", type: "bacon" },
+    { label: "Sauce", type: "sauce" },
     { label: "Cheese", type: "cheese" },
     { label: "Meat", type: "meat" },
   ];

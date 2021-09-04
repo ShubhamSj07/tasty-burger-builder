@@ -1,5 +1,5 @@
 .BuildControls {
-  width: 50%;
+  width: 500px;
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -7,14 +7,14 @@
   margin: 10px 0px;
   padding: 36px;
   box-shadow: 0px 0px 10px 0px #ccc;
-  background: #ffffff;
+  background: #ffffffb8;
   border-radius: 12px;
 }
 
 .builder {
   background-color: #fffcf8;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   flex-direction: row-reverse;
   padding: 0px 50px;

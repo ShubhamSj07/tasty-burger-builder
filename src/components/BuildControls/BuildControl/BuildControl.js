@@ -1,6 +1,7 @@
 import React from "react";
 
 import salad from "../../../assets/burger-salad.jpg";
+import sauce from "../../../assets/burger-sauce.jpg";
 import cheese from "../../../assets/burger-cheese.jpg";
 import meat from "../../../assets/burger-meat.jpg";
 import "./BuildControl.css";
@@ -10,6 +11,16 @@ const BuildControl = props => (
     {props.label === "Salad" && (
       <img
         src={salad}
+        alt="cheese"
+        style={{
+          width: "130px",
+          height: "130px",
+        }}
+      />
+    )}
+    {props.label === "Sauce" && (
+      <img
+        src={sauce}
         alt="cheese"
         style={{
           width: "130px",
