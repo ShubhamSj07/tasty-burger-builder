@@ -1,8 +1,11 @@
 import React from "react";
+import { FaGithub } from "react-icons/fa";
 
 const styles = {
   display: "flex",
   justifyContent: "center",
+  alignItems: "center",
+  flexDirection: "column",
   padding: "25px",
   background: "#FFFCF8",
 };
@@ -10,7 +13,22 @@ const styles = {
 const Footer = () => {
   return (
     <div style={styles}>
-      <h1>
+      <p>
+        you made tasty 🍔, loved it ?{" "}
+        <span>
+          add some new features -{" "}
+          <a href="https://github.com/ShubhamSj07/burger-builder">
+            <FaGithub
+              style={{
+                fontSize: "1.5em",
+                cursor: "pointer",
+                marginBottom: "-5px",
+              }}
+            />
+          </a>{" "}
+        </span>
+      </p>
+      <h3>
         Developed with ❤️ by{" "}
         <a
           href="https://github.com/ShubhamSj07"
@@ -18,7 +36,7 @@ const Footer = () => {
         >
           Shubham Jadhav
         </a>{" "}
-      </h1>
+      </h3>
     </div>
   );
 };
