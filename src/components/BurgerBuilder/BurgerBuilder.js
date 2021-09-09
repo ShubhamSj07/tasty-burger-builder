@@ -1,27 +1,13 @@
 import React, { Component } from "react";
-
+import { connect } from "react-redux";
 import Burger from "../Burger/Burger";
 import BuildControls from "../BuildControls/BuildControls";
 import Modal from "../../utils/Modal/Modal";
 import OrderSummary from "../OrderSummary/OrderSummary";
-
-const INGREDIENT_PRICES = {
-  salad: 0.5,
-  cheese: 1.0,
-  sauce: 0.7,
-  meat: 1.2,
-};
+import { ADD_INGREDIENT, REMOVE_INGREDIENT } from "../../redux/actions";
 
 class BurgerBuilder extends Component {
   state = {
-    ingredients: {
-      sauce: 0,
-      salad: 0,
-      cheese: 0,
-      meat: 0,
-    },
-    totalPrice: 0,
-    purchaseable: false,
     isModalOpen: false,
   };
 
@@ -35,35 +21,7 @@ class BurgerBuilder extends Component {
         return sum + ele;
       }, 0);
 
-    this.setState({ purchaseable: sum > 0 });
-  };
-
-  addIngredientHandler = type => {
-    const oldCount = this.state.ingredients[type];
-    const updatedCount = oldCount + 1;
-    const updatedIngredients = {
-      ...this.state.ingredients,
-    };
-    updatedIngredients[type] = updatedCount;
-    const priceAdd = INGREDIENT_PRICES[type];
-    const oldPrice = this.state.totalPrice;
-    const newPrice = oldPrice + priceAdd;
-    this.setState({ totalPrice: newPrice, ingredients: updatedIngredients });
-    this.updatePurchaseState(updatedIngredients);
-  };
-
-  removeIngredientHandler = type => {
-    const oldCount = this.state.ingredients[type];
-    const updatedCount = oldCount - 1;
-    const updatedIngredients = {
-      ...this.state.ingredients,
-    };
-    updatedIngredients[type] = updatedCount;
-    const priceDeduct = INGREDIENT_PRICES[type];
-    const oldPrice = this.state.totalPrice;
-    const newPrice = oldPrice - priceDeduct;
-    this.setState({ totalPrice: newPrice, ingredients: updatedIngredients });
-    this.updatePurchaseState(updatedIngredients);
+    return sum > 0;
   };
 
   modalHandler = () => {
@@ -75,7 +33,7 @@ class BurgerBuilder extends Component {
   };
 
   purchaseSuccess = () => {
-    alert("Continue to pay!");
+    alert("Hope you enjoyed virtual yummy burger!");
   };
 
   purchaseCancel = () => {
@@ -84,7 +42,7 @@ class BurgerBuilder extends Component {
 
   render() {
     const isDisabled = {
-      ...this.state.ingredients,
+      ...this.props.ingredients,
     };
     console.log(isDisabled);
     for (let key in isDisabled) {
@@ -98,20 +56,20 @@ class BurgerBuilder extends Component {
           closeModal={this.modalCloseHandler}
         >
           <OrderSummary
-            ingredients={this.state.ingredients}
+            ingredients={this.props.ingredients}
             purchaseSuccess={this.purchaseSuccess}
             purchaseCancel={this.purchaseCancel}
-            price={this.state.totalPrice}
+            price={this.props.price}
           />
         </Modal>
         <div className="builder">
-          <Burger ingredients={this.state.ingredients} />
+          <Burger ingredients={this.props.ingredients} />
           <BuildControls
-            addIngredient={this.addIngredientHandler}
-            removeIngredient={this.removeIngredientHandler}
+            addIngredient={this.props.addIngredient}
+            removeIngredient={this.props.removeIngredient}
             disabled={isDisabled}
-            price={this.state.totalPrice}
-            purchaseable={this.state.purchaseable}
+            price={this.props.price}
+            purchaseable={this.updatePurchaseState(this.props.ingredients)}
             isModalOpen={this.modalHandler}
           />
         </div>
@@ -120,4 +78,25 @@ class BurgerBuilder extends Component {
   }
 }
 
-export default BurgerBuilder;
+const mapStateToProps = state => {
+  return {
+    ingredients: state.ingredients,
+    price: state.totalPrice,
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    addIngredient: ingredientName =>
+      dispatch({
+        type: ADD_INGREDIENT,
+        payload: ingredientName,
+      }),
+    removeIngredient: ingredientName =>
+      dispatch({
+        type: REMOVE_INGREDIENT,
+        payload: ingredientName,
+      }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(BurgerBuilder);
